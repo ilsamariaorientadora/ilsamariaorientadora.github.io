@@ -1,0 +1,22 @@
+name: Recibir cuestionario
+on:
+  repository_dispatch:
+    types: [nuevo_cuestionario]
+jobs:
+  guardar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guardar archivo
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const { filename, content } = context.payload.client_payload;
+            await github.rest.repos.createOrUpdateFileContents({
+              owner: "ilsamariaorientadora",
+              repo: "cuestionarios",
+              path: filename,
+              message: `Cuestionario: ${filename}`,
+              content: content,
+              branch: "main"
+            });
