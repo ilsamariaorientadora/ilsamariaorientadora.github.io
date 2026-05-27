@@ -677,17 +677,7 @@
       });
     }
 
-    function saveData() {
-      localStorage.setItem(storageKey, JSON.stringify(collectData()));
-      alert("Guardado");
-    }
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "cuestionario-datos-personales.json";
-      a.click();
-      URL.revokeObjectURL(url);
-    });
+
 
     const saved = localStorage.getItem(storageKey);
     if (saved) fillData(JSON.parse(saved));
